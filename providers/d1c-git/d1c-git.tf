@@ -46,7 +46,7 @@ module "lambda_iam_role" {
    name         = "${var.environment}-${var.name}-LambdaServiceRole"
    create_group = "false"
    role         = "lambda.amazonaws.com"
-   policy       = "{}"
+   policy       = "${data.aws_iam_policy_document.lambda_policy.json}"
    is_inline    = true
 
 }
@@ -72,7 +72,7 @@ module "nginx_iam_role" {
    name         = "${var.environment}-${var.name}-NginxEc2Role"
    create_group = "false"
    role         = "ec2.amazonaws.com"
-   policy       = "{}"
+   policy       = "${data.aws_iam_policy_document.nginx_policy.json}"
    is_inline    = true
 
 }
