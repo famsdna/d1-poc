@@ -25,16 +25,59 @@ provider "aws" {
   }
 }
 
-resource "aws_vpc_dhcp_options" "foo" {
-  domain_name          = "service.consul"
-  domain_name_servers  = ["127.0.0.1", "10.0.0.4"]
-  ntp_servers          = ["127.0.0.1"]
-  netbios_name_servers = ["127.0.0.1"]
-  netbios_node_type    = 2
+data "aws_iam_policy_document" "lambda_policy" {
+  statement {
+    sid = "1"
 
-  tags {
-    Name = "${var.name}"
-    Application = "${var.application}"
-    Environment = "${var.environment}"
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+
+    resources = [
+      "arn:aws:s3:::*",
+    ]
   }
 }
+
+module "lambda_iam_role" {
+   source       = "../../modules/util/iam"
+
+   name         = "${var.environment}-${var.name}-LambdaServiceRole"
+   create_group = "false"
+   role         = "lambda.amazonaws.com"
+   policy       = "{}"
+   is_inline    = true
+
+}
+
+data "aws_iam_policy_document" "nginx_policy" {
+  statement {
+    sid = "1"
+
+    actions = [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+    ]
+
+    resources = [
+      "arn:aws:s3:::*",
+    ]
+  }
+}
+
+module "nginx_iam_role" {
+   source       = "../../modules/util/iam"
+
+   name         = "${var.environment}-${var.name}-NginxEc2Role"
+   create_group = "false"
+   role         = "ec2.amazonaws.com"
+   policy       = "{}"
+   is_inline    = true
+
+}
+
+
+output "lambda_role_name" { value = "${module.lambda_iam_role.role_name}" }
+output "nginx_role_name" { value = "${module.nginx_iam_role.role_name}" }
+output "nginx_instance_profile_arn" { value = "${module.nginx_iam_role.instance_profile_arn}" }
