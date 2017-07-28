@@ -30,12 +30,13 @@ data "aws_iam_policy_document" "lambda_policy" {
     sid = "1"
 
     actions = [
-      "s3:ListAllMyBuckets",
-      "s3:GetBucketLocation",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
     ]
 
     resources = [
-      "arn:aws:s3:::*",
+      "*",
     ]
   }
 }
@@ -47,7 +48,7 @@ module "lambda_iam_role" {
    create_group = "false"
    role         = "lambda.amazonaws.com"
    policy       = "${data.aws_iam_policy_document.lambda_policy.json}"
-   is_inline    = true
+   is_inline    = "true"
 
 }
 
@@ -73,7 +74,7 @@ module "nginx_iam_role" {
    create_group = "false"
    role         = "ec2.amazonaws.com"
    policy       = "${data.aws_iam_policy_document.nginx_policy.json}"
-   is_inline    = true
+   is_inline    = "true"
 
 }
 
