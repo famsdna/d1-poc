@@ -80,5 +80,6 @@ module "nginx_iam_role" {
 
 
 output "lambda_role_name" { value = "${module.lambda_iam_role.role_name}" }
+output "lambda_role_arn" { value = "${module.lambda_iam_role.role_arn}" }
 output "nginx_role_name" { value = "${module.nginx_iam_role.role_name}" }
 output "nginx_instance_profile_arn" { value = "${module.nginx_iam_role.instance_profile_arn}" }
