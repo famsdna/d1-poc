@@ -65,6 +65,17 @@ data "aws_iam_policy_document" "nginx_policy" {
       "arn:aws:s3:::*",
     ]
   }
+  statement {
+    sid = "2"
+
+    actions = [
+      "s3:GetObject"
+    ]
+
+    resources = [
+      "arn:aws:s3:::itxcdn",
+    ]
+  }
 }
 
 module "nginx_iam_role" {
