@@ -73,7 +73,7 @@ data "aws_iam_policy_document" "nginx_policy" {
     ]
 
     resources = [
-      "arn:aws:s3:::itxcdn",
+      "arn:aws:s3:::itxcdn/*",
     ]
   }
 }
