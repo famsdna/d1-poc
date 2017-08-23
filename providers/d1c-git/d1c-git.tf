@@ -69,11 +69,15 @@ data "aws_iam_policy_document" "nginx_policy" {
     sid = "2"
 
     actions = [
-      "s3:GetObject"
+      "s3:GetObject",
+      "s3:ListBucket"
     ]
 
     resources = [
       "arn:aws:s3:::itxcdn",
+      "arn:aws:s3:::itxcdn/*",
+      "arn:aws:s3:::famsdna-codedeploy",
+      "arn:aws:s3:::famsdna-codedeploy/*"
     ]
   }
 }
