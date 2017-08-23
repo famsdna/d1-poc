@@ -62,7 +62,7 @@ data "aws_iam_policy_document" "nginx_policy" {
     ]
 
     resources = [
-      "arn:aws:s3:::*",
+      "arn:aws:s3:::*"
     ]
   }
   statement {
@@ -80,6 +80,17 @@ data "aws_iam_policy_document" "nginx_policy" {
       "arn:aws:s3:::famsdna-codedeploy/*",
       "arn:aws:s3:::famsdna-codedeploy-us-east-2",
       "arn:aws:s3:::famsdna-codedeploy-us-east-2/*"
+    ]
+  }
+  statement {
+    sid = "3"
+
+    actions = [
+      "ec2:DescribeTags"
+    ]
+
+    resources = [
+      "*"
     ]
   }
 }
