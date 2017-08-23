@@ -77,7 +77,9 @@ data "aws_iam_policy_document" "nginx_policy" {
       "arn:aws:s3:::itxcdn",
       "arn:aws:s3:::itxcdn/*",
       "arn:aws:s3:::famsdna-codedeploy",
-      "arn:aws:s3:::famsdna-codedeploy/*"
+      "arn:aws:s3:::famsdna-codedeploy/*",
+      "arn:aws:s3:::famsdna-codedeploy-us-east-2",
+      "arn:aws:s3:::famsdna-codedeploy-us-east-2/*"
     ]
   }
 }
