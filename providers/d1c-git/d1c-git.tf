@@ -93,6 +93,17 @@ data "aws_iam_policy_document" "nginx_policy" {
       "*"
     ]
   }
+  statement {
+    sid = "4"
+
+    actions = [
+      "lambda:InvokeFunction"
+    ]
+
+    resources = [
+      "arn:aws:lambda:us-east-1:837299327104:function:echoEvent"
+    ]
+  }
 }
 
 module "nginx_iam_role" {
