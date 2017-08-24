@@ -57,12 +57,14 @@ data "aws_iam_policy_document" "nginx_policy" {
     sid = "1"
 
     actions = [
-      "s3:ListAllMyBuckets",
-      "s3:GetBucketLocation",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "logs:DescribeLogStreams"
     ]
 
     resources = [
-      "arn:aws:s3:::*"
+      "arn:aws:logs:*:*:*"
     ]
   }
   statement {
