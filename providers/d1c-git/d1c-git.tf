@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "lambda_policy" {
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents*"
     ]
 
     resources = [
